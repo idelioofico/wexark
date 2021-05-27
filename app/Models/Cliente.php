@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     // protected $fillable=[
     //     'nome',
     //     'email',
@@ -18,8 +18,14 @@ class Cliente extends Model
     //     'cep',
     //     'data_cadastro',
     //     'complemento_endereco',
-        
+
     // ];
 
-    protected $guarded=[];
+    protected $guarded = [];
+
+    //Defining relationship between Pedido and Cliente
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class);
+    }
 }

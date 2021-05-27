@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PastelController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Requests\ClienteRequest;
 use App\Models\Cliente;
 use App\Models\Pastel;
@@ -23,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//Clientes  routes
 Route::prefix('clientes')->name('clientes.')->group(function () {
     Route::get('/', [ClienteController::class, 'index'])->name('index');
     Route::post('/store', [ClienteController::class, 'store'])->name('store');
@@ -33,12 +34,14 @@ Route::prefix('clientes')->name('clientes.')->group(function () {
 });
 
 
-// Route::prefix('pasteis')->name('pasteis.')->group(function () {
-//     Route::get('/', [PastelController::class, 'index'])->name('index');
-//     Route::post('/store', [PastelController::class, 'store'])->name('store');
-//     Route::get('/{pastel}', [PastelController::class, 'show'])->name('show');
-//     Route::put('/{pastel}', [PastelController::class, 'update'])->name('update');
-//     Route::delete('/{pastel}', [PastelController::class, 'destroy'])->name('delete');
-// });
-
+//Pasteis Resource routes
 Route::apiResource('pasteis',PastelController::class);
+
+//Pedido custom routes
+Route::prefix('pedidos')->name('pedidos.')->group(function () {
+    Route::get('/', [PedidoController::class, 'index'])->name('index');
+    Route::post('/store', [PedidoController::class, 'store'])->name('store');
+    Route::get('/{pedido}', [PedidoController::class, 'show'])->name('show');
+    Route::put('/{pedido}', [PedidoController::class, 'update'])->name('update');
+    Route::delete('/{pedido}', [PedidoController::class, 'destroy'])->name('delete');
+});

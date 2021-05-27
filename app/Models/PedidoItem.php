@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PedidoItem extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = [
-        'pastel_id', 'quantidade', 'subtotal'
-    ];
+    // protected $fillable = [
+    //     'pastel_id', 'quantidade', 'subtotal'
+    // ];
+
+    protected $guarded=[];
 
     //Defining relation  between Pedido and PedidoItem
     public function pedido()
@@ -20,7 +22,7 @@ class PedidoItem extends Model
     }
 
     //Defining relation  between PedidoITem and Pasteis
-    public function pasteis(){
-        return $this->hasMany(Pastel::class);
+    public function pastel(){
+        return $this->belongsTo(Pastel::class);
     }
 }

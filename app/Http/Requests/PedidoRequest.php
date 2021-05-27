@@ -26,7 +26,8 @@ class PedidoRequest extends FormRequest
         return [
             'cliente_id' => 'required|exists:clientes,id',
             'data_criacao' => 'required|date|date_format:Y-m-d',
-            'pasteis.*.id'=>'required|exists'
+            'items.*.pastel_id'=>'required|exists:pastels,id',
+            'items.*.quantidade'=>'required|numeric|integer|min:1'
         ];
     }
 
@@ -34,8 +35,9 @@ class PedidoRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'exists' => 'O cliente informado não existe',
+            'exists' => 'O :attribute informado não existe',
             'date' => 'O campo deve ser do tipo data',
+            'integer'=>'O :attribute deve ser numérico',
         ];
     }
 }

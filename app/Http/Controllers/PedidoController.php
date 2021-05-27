@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PedidoRequest;
+use App\Models\Pastel;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
@@ -14,10 +16,23 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedido = Pedido::transform(function ($pedido) {
+        // Getting pedidos by transform method
+        $pedido = Pedido::with('pedido_items')->get()->transform(function ($pedido) {
 
-            return $pedido->push(['items' => $pedido->pedido_items->toArray()]);
-        
+           return array(
+                'cliente' => $pedido->cliente->nome,
+                'items' => $pedido->pedido_items->transform(function ($item) {
+                    return array(
+                        'pastel' => $item->pastel->nome,
+                        'preco'=>$item->preco,
+                        'quantidade'=>$item->quantidade,
+                        'subtotal'=>$item->subtotal
+                    );
+                }),
+                'total' => $pedido->data_criacao,
+                'data_criacao'=>$pedido->data_criacao,
+            );
+           
         });
 
         return response()->json($pedido);
@@ -39,9 +54,39 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PedidoRequest $request)
     {
-        //
+        // dd($request->all());
+
+        //Get items and calculate subtotal
+        $items = collect($request->items)->transform(function ($item, $key) {
+            $pastel = Pastel::find($item['pastel_id']);
+            return array(
+                'pastel_id' => $pastel->id,
+                'quantidade' => $qnt = $item['quantidade'],
+                'preco' => $preco = $pastel->preco,
+                'subtotal' => $qnt * $preco,
+            );
+        });
+
+        //Pedido data
+        $pedido = array(
+            'cliente_id' => $request->cliente_id,
+            'total' => $items->sum('subtotal'),
+            'data_criacao' => $request->data_criacao
+        );
+
+        $pedido = Pedido::create($pedido);
+        $pedido->pedido_items()->createMany($items);
+
+        // $pedidos = $request->items->transform(function ($item) {
+        //     $pastel = Pastel::find($item['pastel_id']);
+        //     return $item->append([$item['quantidade'] * $pastel->preco]);
+        // });
+
+        // dd($pedido);
+
+        dd($pedido->with('items'));
     }
 
     /**

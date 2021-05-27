@@ -15,11 +15,11 @@ class Pastel extends Model
     // ];
 
     protected $guarded = [];
-    
+
 
     //Defining relation  between Pastel and PedidoItem
-    public function pedido_item()
+    public function pedido_items()
     {
-        return $this->belongsTo(PedidoItem::class);
+        return $this->hasMany(PedidoItem::class);
     }
 }
