@@ -37,9 +37,8 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        if ($cliente = Cliente::create($request->all()))
-            return response()->json([$cliente]);
-        return response()->json(['messagem' => 'Ocorreu um erro ao tentar gravar os dados']);
+        $cliente = Cliente::create($request->all());
+        return response()->json([$cliente]);
     }
 
     /**
@@ -74,13 +73,7 @@ class ClienteController extends Controller
      */
     public function update(ClienteRequest $request, Cliente $cliente)
     {
-
-        if ($cliente->update($request->all()))
-            return response()->json([$cliente]);
-        return response()->json(['messagem' => 'Ocorreu um erro ao tentar gravar os dados']);
-
-        // // $cliente->update($request->all());
-        // return $cliente;
+        return response()->json($cliente->update($request->all()));
     }
 
     /**
@@ -91,9 +84,6 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        
-        if ($cliente->delete())
-            return response()->json(['messagem' => 'os dados foram excluidos', 'tipo' => 'sucesso']);
-        return response()->json(['messagem' => 'os dados foram excluidos', 'tipo' => 'erro']);
+        return response()->json($cliente->delete());
     }
 }

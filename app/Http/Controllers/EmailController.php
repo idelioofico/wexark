@@ -9,16 +9,14 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
-    public function sendEmail($to, $pedido)
-    {
 
-        dd($pedido);
+    public function enviarNotificacao($to, $pedido)
+    {
         $detalhes = [
             'titulo' => 'Confirmação de pedido',
             'pedido' => $pedido
         ];
-        Mail::to($to)->send(new NotificarClienteMail($detalhes));
-
-        return "Mail sent";
+        Mail::to($to)->queue(new NotificarClienteMail($detalhes));
+        return;
     }
 }

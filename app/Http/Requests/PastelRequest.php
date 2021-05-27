@@ -28,7 +28,7 @@ class PastelRequest extends FormRequest
         return [
             'nome' => 'required|string|max:100|unique:pastels,nome' . $regra,
             'preco' => 'required|numeric',
-            'foto' => 'nullable|image|'
+            'foto' => 'required|image|'
         ];
     }
     public function messages()
@@ -37,6 +37,7 @@ class PastelRequest extends FormRequest
             'required' => 'O campo :attribute é obrigatório',
             'numeric' => 'O campo :attribute deve ser numérico',
             'image' => 'O campo :attribute deve conter uma imagem',
+            'unique' => 'O dado introduzido  já existe',
         ];
     }
 }

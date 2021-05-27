@@ -20,7 +20,8 @@ class CreateClientesTable extends Migration
             $table->string('telefone', 15);
             $table->date('data_nascimento')->nullable();
             $table->string('endereco', 200);
-            $table->string('complemento_endereco', 100)->nullable();
+            $table->string('complemento', 100)->nullable();
+            $table->string('bairro', 100)->nullable();
             $table->string('cep',4);
             $table->date('data_cadastro');
             $table->timestamps();

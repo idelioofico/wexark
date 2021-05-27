@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PedidoRequest;
 use App\Models\Pastel;
 use App\Models\Pedido;
+use Database\Seeders\PedidoSeeder;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -19,20 +20,20 @@ class PedidoController extends Controller
         // Getting pedidos by transform method
         $pedido = Pedido::with('pedido_items')->get()->transform(function ($pedido) {
 
-           return array(
+            return array(
+                'íd' => $pedido->id,
                 'cliente' => $pedido->cliente->nome,
-                'items' => $pedido->pedido_items->transform(function ($item) {
+                'pedido_items' => $pedido->pedido_items->transform(function ($item) {
                     return array(
                         'pastel' => $item->pastel->nome,
-                        'preco'=>$item->preco,
-                        'quantidade'=>$item->quantidade,
-                        'subtotal'=>$item->subtotal
+                        'preco' => $item->preco,
+                        'quantidade' => $item->quantidade,
+                        'subtotal' => $item->subtotal
                     );
                 }),
                 'total' => $pedido->data_criacao,
-                'data_criacao'=>$pedido->data_criacao,
+                'data_criacao' => $pedido->data_criacao,
             );
-           
         });
 
         return response()->json($pedido);
@@ -59,7 +60,7 @@ class PedidoController extends Controller
         // dd($request->all());
 
         //Get items and calculate subtotal
-        $items = collect($request->items)->transform(function ($item, $key) {
+        $pedidoItems = collect($request->items)->transform(function ($item, $key) {
             $pastel = Pastel::find($item['pastel_id']);
             return array(
                 'pastel_id' => $pastel->id,
@@ -70,16 +71,23 @@ class PedidoController extends Controller
         });
 
         //Pedido data
-        $pedido = array(
+        $pedidoData = array(
             'cliente_id' => $request->cliente_id,
-            'total' => $items->sum('subtotal'),
+            'total' => $pedidoItems->sum('subtotal'),
             'data_criacao' => $request->data_criacao
         );
 
-        $pedido = Pedido::create($pedido);
-        $pedido->pedido_items()->createMany($items);
+        //Create pedido
+        $pedido = Pedido::create($pedidoData);
 
-       (new EmailController())->sendEmail($pedido->cliente->email,$pedido);
+        //Store pedidoITems using relationship
+        $items=$pedido->pedido_items()->createMany($pedidoItems);
+
+        //Send mail to cliente notifying pedido
+        (new EmailController())->enviarNotificacao($pedido->cliente->email, $pedido);
+
+        //Returning data using Show($pedido) method
+       return $this->show($pedido->id);
     }
 
     /**
@@ -88,9 +96,29 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show(Pedido $pedido)
+    public function show($id)
     {
-        //
+        $pedido = Pedido::where('id', $id)->with('pedido_items')->get()->transform(function ($pedido) {
+
+            return array(
+                'cliente' => $pedido->cliente->nome,
+                'pedido_items' => $pedido->pedido_items->transform(function ($item) {
+                    return array(
+                        'pastel' => $item->pastel->nome,
+                        'preco' => $item->preco,
+                        'quantidade' => $item->quantidade,
+                        'subtotal' => $item->subtotal
+                    );
+                }),
+                'total' => $pedido->data_criacao,
+                'data_criacao' => $pedido->data_criacao,
+            );
+        });
+
+
+        // $pedido=Pedido::find($pedido);
+
+        return response()->json($pedido);
     }
 
     /**
@@ -122,8 +150,16 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
+    public function destroy($id)
     {
-        //
+        //Get the pedido
+        $pedido = Pedido::findOrfail($id);
+
+        //First, softdelete all its pedido_items
+        foreach ($pedido->pedido_items as $item) {
+            $item->delete();
+        };
+        //then delete the parent record
+        return response()->json($pedido->delete());
     }
 }

@@ -1,62 +1,302 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# WEXARK Tecnologia
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## API para gerenciamento de pedidos de uma pastelaria
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+**Requisitos:**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 7.2+
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Persistindo dados **
 
-## Laravel Sponsors
+Para executar o projecto, primeiro deverá [configurar a base de dados][https://laravel.com/docs/4.2/database] a sua preferência (SQLite, PostgreSQL, MySQL) . 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+De seguida, usando a linha de comando, navegue até ao directório do projecto e excute:
 
-### Premium Partners
+```shell
+php artisan migrate --seed
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+De seguida, execute o projecto através do comando:
 
-## Contributing
+```shell
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ou a partir do seu servidor
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+### Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### **Cliente**: Listar, Cadastrar, Actualizar e Apagar
+
+
+
+**Retornar todos os clientes:**
+
+- URL:
+
+  ```
+  GET /api/clientes    exemplo: https://wexark.test/api/clientes
+  ```
+
+- Resposta: Array JSON da lista de clientes
+
+  
+
+**Cadastrar novo cliente:**
+
+- URL: 
+
+  ```
+  POST /api/clientes    exemplo: https://wexark.test/api/clientes
+  ```
+
+- Parametros:
+
+| Campo           | Obrigatório | Descrição                                         |
+| --------------- | ----------- | ------------------------------------------------- |
+| nome            | sim         | texto ,deve conter no máximo 100 caracteres       |
+| email           | sim         | texto,deve conter no máximo 40 caracteres         |
+| telefone        | sim         | texto, deve conter no máximo 15 caracteres        |
+| data_nascimento | não         | data(Y-m-d)                                       |
+| endereco        | sim         | texto,  deve conter no máximo 200 caracteres      |
+| complemento     | não         | texto,  deve conter no máximo 100 caracteres      |
+| bairro          | sim         | texto,  deve conter no máximo 100 caracteres      |
+| cep             | sim         | texto, deve conter no máximo 4 caracteres numeros |
+| data_cadastro   | sim         | data(Y-m-d)                                       |
+
+- Resposta: Array JSON dos dados do cliente cadastrado
+
+  
+
+**Retornar um Cliente específico:**
+
+- URL: 
+
+  ```
+  GET /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/1
+  ```
+
+  
+
+- Resposta: Array JSON do Cliente
+
+  
+
+**Actualizar  cliente:**
+
+- URL: 
+
+  ```
+  PUT /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/2
+  ```
+
+- Parametros:
+
+| Campo           | Obrigatório | Descrição                                         |
+| --------------- | ----------- | ------------------------------------------------- |
+| nome            | não         | texto ,deve conter no máximo 100 caracteres       |
+| email           | não         | texto,deve conter no máximo 40 caracteres         |
+| telefone        | não         | texto, deve conter no máximo 15 caracteres        |
+| data_nascimento | não         | data(Y-m-d)                                       |
+| endereco        | não         | texto,  deve conter no máximo 200 caracteres      |
+| complemento     | não         | texto,  deve conter no máximo 100 caracteres      |
+| bairro          | não         | texto,  deve conter no máximo 100 caracteres      |
+| cep             | não         | texto, deve conter no máximo 4 caracteres numeros |
+| data_cadastro   | não         | data(Y-m-d)                                       |
+
+- Resposta: Array JSON dados do cliente actualizado
+
+  
+
+**Apagar cliente**
+
+- URL: 
+
+  ```
+  Delete /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/2
+  ```
+
+- Resposta: Boolean
+
+
+
+
+
+#### **Pastel**: Listar, Cadastrar, Actualizar e Apagar
+
+
+
+**Retornar todos os pasteis:**
+
+- URL:
+
+  ```
+  GET /api/pasteis  exemplo: https://wexark.test/api/pasteis
+  ```
+
+- Resposta: Array JSON da lista dos pasteis
+
+  
+
+**Cadastrar novo Pastel:**
+
+- URL: 
+
+  ```
+  POST /api/pasteis  exemplo: https://wexark.test/api/pasteis
+  ```
+
+- Parametros:
+
+| Campo | Obrigatório | Descrição                                   |
+| ----- | ----------- | ------------------------------------------- |
+| nome  | sim         | texto ,deve conter no máximo 100 caracteres |
+| preco | sim         | numerico                                    |
+| foto  | sim         | imagem                                      |
+
+- Resposta: Array JSON do dados cadastrados
+
+  
+
+**Retornar Pastel pelo ID:**
+
+- URL: 
+
+  ```
+  GET /api/pasteis/{id} exemplo: https://wexark.test/api/pasteis/2
+  ```
+
+  
+
+- Resposta: Array JSON do dados do Pastel
+
+  
+
+**Actualizar  Pastel:**
+
+- URL: 
+
+  ```
+  PUT /api/pasteis/{id}  exemplo: https://wexark.test/api/pasteis/2
+  ```
+
+- Parametros:
+
+| Campo | Obrigatório | Descrição                                   |
+| ----- | ----------- | ------------------------------------------- |
+| nome  | não         | texto ,deve conter no máximo 100 caracteres |
+| preco | não         | numerico                                    |
+| foto  | não         | imagem                                      |
+
+- Resposta: Array JSON dos dados do Pastel actualizado
+
+  
+
+**Apagar Pastel**
+
+- URL: 
+
+  ```
+  Delete /api/pasteis/{id} exemplo: https:://wexark.test/api/pasteis/2
+  ```
+
+- Resposta: Boolean
+
+
+
+#### **Pedido**: Listar, Registar, Apagar
+
+
+
+**Retornar todos os pedidos:**
+
+- URL:
+
+  ```
+  GET /api/pedidos  exemplo: https://wexark.test/api/pedidos
+  ```
+
+- Resposta: Array JSON da lista dos pedidos
+
+  
+
+**Registar Pedido:**
+
+```
+Feature: Após registar um pedido é enviado um email de forma síncrona para o cliente com os detalhes do pedido
+```
+
+
+
+- URL: 
+
+  ```
+  POST /api/pedidos  exemplo: https://wexark.test/api/pedidos
+  ```
+
+- Parametros:
+
+| Campo        | Obrigatório | Descrição                                                    |
+| ------------ | ----------- | ------------------------------------------------------------ |
+| cliente_id   | sim         | numérico, chave estrangeira                                  |
+| items        | sim         | array de items do pedido composto por **pastel_id, quantidade** |
+| data_criacao | sim         | data(Y-m-d)                                                  |
+
+Exemplo de paramtros:
+
+```json
+{
+	"cliente_id":1,
+	"items":[
+		{"pastel_id":3,
+		 "quantidade":3
+		},
+		{
+			"pastel_id":4,
+			"quantidade":2
+		},
+	],
+	"data_criacao":"2021-05-27"
+}
+```
+
+
+
+- Resposta: Array JSON dos dados Pedido registado
+
+  
+
+**Retornar Pedido pelo ID:**
+
+URL: 
+
+- ```
+  GET /api/pedidos/{id} exemplo: https://wexark.test/api/pedidos/2
+  ```
+
+  
+
+- Resposta: Array JSON   dos dados do Pedidol, caso exista
+
+  
+
+**Apagar Pedido**
+
+- URL: 
+
+  ```
+  Delete /api/pedidos/{id} exemplo: https:://wexark.test/api/pedidos/2
+  ```
+
+- Resposta: Boolean
+
+
+

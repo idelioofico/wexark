@@ -18,6 +18,7 @@ class NotificarClienteMail extends Mailable
      */
 
     public $detalhes;
+
     public function __construct($detalhes)
     {
         $this->detalhes = $detalhes;
@@ -30,6 +31,6 @@ class NotificarClienteMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Notificação de pedido')->view('emails.notificarCliente');
+        return $this->subject('Confirmação de pedido')->view('emails.notificarCliente');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Pastel extends Model
 {
@@ -21,5 +22,12 @@ class Pastel extends Model
     public function pedido_items()
     {
         return $this->hasMany(PedidoItem::class);
+    }
+
+    //Defining accesors
+
+    public function getFotoAttribute($valor)
+    {
+        return Storage::url($valor);
     }
 }

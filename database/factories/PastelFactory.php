@@ -24,7 +24,7 @@ class PastelFactory extends Factory
         return [
             'nome' => $this->faker->word,
             'preco' => $this->faker->randomNumber(),
-            'foto' => $this->faker->imageUrl()
+            'foto' => $this->faker->image(storage_path())
         ];
     }
 }

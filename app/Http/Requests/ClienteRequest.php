@@ -23,6 +23,7 @@ class ClienteRequest extends FormRequest
      */
     public function rules()
     {
+       
 
         $regra = ',' . (!empty($this->cliente) ? $this->cliente->id : 'Null') . ',id,deleted_at,NULL';
 
@@ -32,6 +33,7 @@ class ClienteRequest extends FormRequest
             'telefone' => 'required|string|max:15|unique:clientes,telefone' . $regra,
             'data_nascimento' => 'nullable|date|date_format:Y-m-d',
             'endereco' => 'required|string|max:200',
+            'bairro' => 'required|string|max:100',
             'complemento_endereco' => 'nullable|string|max:100',
             'cep' => 'required|max:4',
             'data_cadastro' => 'required|date|date_format:Y-m-d'
