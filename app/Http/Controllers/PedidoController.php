@@ -79,14 +79,7 @@ class PedidoController extends Controller
         $pedido = Pedido::create($pedido);
         $pedido->pedido_items()->createMany($items);
 
-        // $pedidos = $request->items->transform(function ($item) {
-        //     $pastel = Pastel::find($item['pastel_id']);
-        //     return $item->append([$item['quantidade'] * $pastel->preco]);
-        // });
-
-        // dd($pedido);
-
-        dd($pedido->with('items'));
+       (new EmailController())->sendEmail($pedido->cliente->email,$pedido);
     }
 
     /**
