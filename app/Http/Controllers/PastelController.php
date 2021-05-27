@@ -50,7 +50,7 @@ class PastelController extends Controller
      */
     public function show($pastel)
     {
-        $pastel = Pastel::find($pastel);
+        $pastel = Pastel::findOrFail($pastel);
         return response()->json($pastel);
     }
 
@@ -72,9 +72,11 @@ class PastelController extends Controller
      * @param  \App\Models\Pastel  $pastel
      * @return \Illuminate\Http\Response
      */
-    public function update(PastelRequest $request, $pastel)
+    public function update(PastelRequest $request,Pastel $pastel)
     {
-        $pastel = Pastel::find($pastel);
+        // $pastel = Pastel::findOrFail($pastel);
+        $foto = $request->file('foto')->store('pasteis');
+        $request['foto'] = $foto;
         $pastel->update($request->all());
         return response()->json($pastel);
     }
@@ -87,7 +89,7 @@ class PastelController extends Controller
      */
     public function destroy($pastel)
     {
-        $pastel = Pastel::find($pastel);
+        $pastel = Pastel::findOrFail($pastel);
         return response()->json($pastel->delete());
     }
 }

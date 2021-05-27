@@ -20,13 +20,11 @@ De seguida, usando a linha de comando, navegue até ao directório do projecto e
 php artisan migrate --seed
 ```
 
-De seguida, execute o projecto através do comando:
+De seguida, execute o projecto através do comando para correr na maquina local:
 
 ```shell
 php artisan serve
 ```
-
-Ou a partir do seu servidor
 
 
 
@@ -299,4 +297,8 @@ URL:
 - Resposta: Boolean
 
 
+
+
+
+Author [Idélio Djalo Ofiço][https://www.linkedin.com/in/id%C3%A9lio-ofi%C3%A7o-72787a115/] :heart:
 
