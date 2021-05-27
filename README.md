@@ -229,7 +229,7 @@ php artisan serve
 **Registar Pedido:**
 
 ```
-Feature: Após registar um pedido é enviado um email de forma síncrona para o cliente com os detalhes do pedido
+Nota: Após registar um pedido é enviado um email de forma síncrona para o cliente com os detalhes do pedido, por isso é importante ter o service de enail devidamente configurado
 ```
 
 
