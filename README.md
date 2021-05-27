@@ -299,4 +299,8 @@ URL:
 - Resposta: Boolean
 
 
+Author [Idélio Djalo Ofiço][https://www.linkedin.com/in/id%C3%A9lio-ofi%C3%A7o-72787a115/] :heart:
+
+
+
 
