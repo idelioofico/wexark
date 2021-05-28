@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClienteRequest;
 use App\Models\Cliente;
-use Illuminate\Http\Request;
+use App\Services\ClienteService;
 
 class ClienteController extends Controller
 {
+
+    protected $service;
+
+    public function __construct(ClienteService $service)
+    {
+        $this->service = $service;
+    }
 
     /**
      * Display a listing of the resource.
@@ -16,17 +23,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return response()->json(Cliente::get()->toArray());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($this->service->all());
     }
 
     /**
@@ -37,53 +34,40 @@ class ClienteController extends Controller
      */
     public function store(ClienteRequest $request)
     {
-        $cliente = Cliente::create($request->all());
-        return response()->json([$cliente]);
+        return response()->json($this->service->store($request));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cliente  $cliente
+     * @param  int  $cliente
      * @return \Illuminate\Http\Response
      */
     public function show($cliente)
     {
-        $cliente = Cliente::find($cliente);
-        return response()->json($cliente);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cliente $cliente)
-    {
-        //
+        return response()->json($this->service->find($cliente));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cliente  $cliente
+     * @param  \Illuminate\Http\ClienteRequest  $request
+     * @param  int  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(ClienteRequest $request, Cliente $cliente)
+    public function update(ClienteRequest $request, $cliente)
     {
-        return response()->json($cliente->update($request->all()));
+        return response()->json($this->service->update($request, $cliente));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cliente  $cliente
+     * @param  int $cliente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($cliente)
     {
-        return response()->json($cliente->delete());
+        return response()->json($this->service->delete($cliente));
     }
 }

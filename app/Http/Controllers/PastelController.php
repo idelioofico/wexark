@@ -53,12 +53,12 @@ class PastelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\PastelRequest  $request
-     * @param  int  $id
+     * @param  int  $icliente
      * @return \Illuminate\Http\Response
      */
-    public function update(PastelRequest $request, $id)
+    public function update(PastelRequest $request, $pastel)
     {
-        return response()->json($this->service->update($request, $id));
+        return response()->json($this->service->update($request, $pastel));
     }
 
     /**
@@ -67,8 +67,8 @@ class PastelController extends Controller
      *  $pastel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($pastel)
     {
-        return response()->json($this->service->delete($id));
+        return response()->json($this->service->delete($pastel));
     }
 }

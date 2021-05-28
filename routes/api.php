@@ -27,13 +27,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Cliente resoure routes
 Route::apiResource('clientes', ClienteController::class);
 
+
 //Pastel routes
 Route::prefix('pasteis')->name('pasteis.')->group(function () {
     Route::get('/', [PastelController::class, 'index'])->name('index');
     Route::post('/', [PastelController::class, 'store'])->name('store');
-    Route::get('/{id}', [PastelController::class, 'show'])->name('show');
-    Route::put('/{id}', [PastelController::class, 'update'])->name('update');
-    Route::delete('/{id}', [PastelController::class, 'destroy'])->name('delete');
+    Route::get('/{pastel}', [PastelController::class, 'show'])->name('show');
+    Route::put('/{pastel}', [PastelController::class, 'update'])->name('update');
+    Route::delete('/{pastel}', [PastelController::class, 'destroy'])->name('delete');
 });
 
 //Pedido custom routes

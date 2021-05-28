@@ -25,7 +25,7 @@ class ClienteRequest extends FormRequest
     {
        
 
-        $regra = ',' . (!empty($this->cliente) ? $this->cliente->id : 'Null') . ',id,deleted_at,NULL';
+        $regra = ',' .($this->cliente?: 'Null'). ',id,deleted_at,NULL';
 
         return [
             'nome' => (empty($this->cliente) ? "required" : "nullable").'|string|max:100|unique:clientes,nome' . $regra,

@@ -41,7 +41,7 @@ class PastelService implements IPastel
     {
         $attributes = $request->all();
         if ($request->hasFile('foto'))
-            $attributes['foto'] = File::Upload($this->path, $attributes['foto']);
+            $attributes['foto'] = File::Upload($this->path, $attributes['foto']); //File Helper for uploads
         return $this->pastelRespository->update($attributes, $id);
     }
 

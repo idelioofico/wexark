@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Storage;
 
 class  File
 {
-
+    //Retrieve uploaded file url
     public static function Url($path)
     {
         return Storage::url($path);
     }
 
+    //Upload file
     public static function Upload(string $path, UploadedFile $file, string $name = '')
     {
         $storedFile = "";
@@ -23,14 +24,15 @@ class  File
         }
 
         if (!empty($path) && !empty($name)) {
-           $storedFile=Storage::putFileAs($path, $file, $name.'.'.$file->extension());
+            $storedFile = Storage::putFileAs($path, $file, $name . '.' . $file->extension());
         }
-       
+
         return $storedFile;
     }
 
+    //Delete uploaded single file or multipli by passing array of file path's as parameter
     public static function Delete($path)
     {
-       return  Storage::delete($path);
+        return  Storage::delete($path);
     }
 }

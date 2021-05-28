@@ -24,12 +24,12 @@ class PastelRequest extends FormRequest
     public function rules()
     {
 
-        $regra = ',' . (!empty($this->id) ? $this->id : 'NULL') . ',id,deleted_at,NULL';
+        $regra = ',' . ($this->pastel? : 'NULL') . ',id,deleted_at,NULL';
 
         return [
-            'nome' => (empty($this->id) ? "required" : "nullable") . "|string|max:100|unique:pastels,nome" . $regra,
-            'preco' => (empty($this->id) ? "required" : "nullable") . '|numeric',
-            'foto' => (empty($this->id) ? "required" : "nullable") . '|image|',
+            'nome' => (empty($this->pastel) ? "required" : "nullable") . "|string|max:100|unique:pastels,nome" . $regra,
+            'preco' => (empty($this->pastel) ? "required" : "nullable") . '|numeric',
+            'foto' => (empty($this->pastel) ? "required" : "nullable") . '|image|',
         ];
     }
 

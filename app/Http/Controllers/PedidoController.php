@@ -81,13 +81,13 @@ class PedidoController extends Controller
         $pedido = Pedido::create($pedidoData);
 
         //Store pedidoITems using relationship
-        $items=$pedido->pedido_items()->createMany($pedidoItems);
+        $items = $pedido->pedido_items()->createMany($pedidoItems);
 
         //Send mail to cliente notifying pedido
-        //(new EmailController())->enviarNotificacao($pedido->cliente->email, $pedido);
+       (new EmailController())->enviarNotificacao($pedido->cliente->email, $pedido);
 
         //Returning data using Show($pedido) method
-       return $this->show($pedido->id);
+        return $this->show($pedido->id);
     }
 
     /**
@@ -115,8 +115,6 @@ class PedidoController extends Controller
             );
         });
 
-
-        // $pedido=Pedido::find($pedido);
 
         return response()->json($pedido);
     }

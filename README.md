@@ -6,10 +6,10 @@
 
 Este projecto foi desenvolvido usando o framework Laravel na sua versão 8.x com uma base de dados SQLite.
 
-
 **Requisitos:**
 
-- PHP 7.2+
+- PHP 7.3+
+- [Composer][https://getcomposer.org/download/]
 
 **Persistindo dados **
 
@@ -33,7 +33,7 @@ php artisan serve
 
 
 
-#### **Cliente**: Listar, Cadastrar, Actualizar e Apagar
+#### **Cliente**: Listar, Cadastrar, Actualizar e Apagar clientes
 
 
 
@@ -111,7 +111,7 @@ php artisan serve
 | cep             | não         | texto, deve conter no máximo 4 caracteres numeros |
 | data_cadastro   | não         | data(Y-m-d)                                       |
 
-- Resposta: Array JSON dados do cliente actualizado
+- Resposta: Boolean
 
   
 
@@ -129,7 +129,7 @@ php artisan serve
 
 
 
-#### **Pastel**: Listar, Cadastrar, Actualizar e Apagar
+#### **Pastel**: Listar, Cadastrar, Actualizar e Apagar 
 
 
 
@@ -195,7 +195,7 @@ php artisan serve
 | preco | não         | numerico                                    |
 | foto  | não         | imagem                                      |
 
-- Resposta: Array JSON dos dados do Pastel actualizado
+- Resposta: Boolean
 
   
 
@@ -304,5 +304,5 @@ URL:
 
 
 
-Author [Idélio Djalo Ofiço][https://www.linkedin.com/in/id%C3%A9lio-ofi%C3%A7o-72787a115/] :heart:
+Autor [Idélio Djalo Ofiço][https://www.linkedin.com/in/id%C3%A9lio-ofi%C3%A7o-72787a115/] :heart:
 
