@@ -4,6 +4,7 @@ namespace App\Interfaces;
 
 use App\Http\Requests\PastelRequest;
 
+
 interface IPastel
 {
 

@@ -11,11 +11,11 @@ class Pastel extends Model
 {
     use HasFactory, SoftDeletes;
 
-    // protected $fillable=[
-    //     'nome','preco','foto'
-    // ];
+    protected $fillable=[
+        'nome','preco','foto'
+    ];
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
 
     //Defining relation  between Pastel and PedidoItem

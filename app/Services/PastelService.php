@@ -27,15 +27,9 @@ class PastelService implements IPastel
     public function store(PastelRequest $request)
     {
         $attributes = $request->all();
-        $attributes['foto'] = File::Upload($this->path, $attributes['foto']);
-
-        if (($createdPastel = $this->pastelRespository->store($attributes))) {
-            return $createdPastel;
-        } else {
-            //Delete uploaded phot is pastel not store
-            File::Delete($attributes['foto']);
-        }
-        return;
+        if ($request->hasFile('foto'))
+            $attributes['foto'] = File::Upload($this->path, $attributes['foto']);
+        return $this->pastelRespository->store($attributes);
     }
 
     public function find(int $id)
@@ -46,6 +40,8 @@ class PastelService implements IPastel
     public function update(PastelRequest $request, int $id)
     {
         $attributes = $request->all();
+        if ($request->hasFile('foto'))
+            $attributes['foto'] = File::Upload($this->path, $attributes['foto']);
         return $this->pastelRespository->update($attributes, $id);
     }
 

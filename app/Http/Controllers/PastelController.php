@@ -15,6 +15,7 @@ class PastelController extends Controller
     {
         $this->service = $service;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,18 +27,9 @@ class PastelController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PastelRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(PastelRequest $request)
@@ -49,40 +41,24 @@ class PastelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pastel  $pastel
+     * @param int  $pastel
      * @return \Illuminate\Http\Response
      */
     public function show($pastel)
     {
-        $pastel = Pastel::findOrFail($pastel);
-        return response()->json($pastel);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pastel  $pastel
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pastel $pastel)
-    {
-        //
+        return response()->json($this->service->find($pastel));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pastel  $pastel
+     * @param  \Illuminate\Http\PastelRequest  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PastelRequest $request, Pastel $pastel)
+    public function update(PastelRequest $request,$id)
     {
-        // $pastel = Pastel::findOrFail($pastel);
-        $foto = $request->file('foto')->store('pasteis');
-        $request['foto'] = $foto;
-        $pastel->update($request->all());
-        return response()->json($pastel);
+        return response()->json($this->service->update($request,$id));
     }
 
     /**

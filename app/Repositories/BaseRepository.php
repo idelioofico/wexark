@@ -20,18 +20,18 @@ class BaseRepository
 
     public function store(array $attributes): object
     {
-        // return $this->obj->store($attributes);
-        return new stdClass;
+        return $this->obj->create($attributes);
+
     }
 
     public function find(int $id): object
     {
-        return $this->obj->find($id);
+        return $this->obj->findOrFail($id);
     }
 
     public function update(array $attributes, int $id): bool
     {
-        return $this->obj->find($id)->update($attributes);
+        return $this->obj->findOrFail($id)->update($attributes);
     }
 
     public function delete(int $id): bool

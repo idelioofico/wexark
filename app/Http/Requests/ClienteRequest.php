@@ -28,15 +28,15 @@ class ClienteRequest extends FormRequest
         $regra = ',' . (!empty($this->cliente) ? $this->cliente->id : 'Null') . ',id,deleted_at,NULL';
 
         return [
-            'nome' => 'required|string|max:100|unique:clientes,nome' . $regra,
-            'email' => 'required|email|max:40|unique:clientes,email' . $regra,
-            'telefone' => 'required|string|max:15|unique:clientes,telefone' . $regra,
+            'nome' => (empty($this->cliente) ? "required" : "nullable").'|string|max:100|unique:clientes,nome' . $regra,
+            'email' => (empty($this->cliente) ? "required" : "nullable").'|email|max:40|unique:clientes,email' . $regra,
+            'telefone' => (empty($this->cliente) ? "required" : "nullable").'|string|max:15|unique:clientes,telefone' . $regra,
             'data_nascimento' => 'nullable|date|date_format:Y-m-d',
-            'endereco' => 'required|string|max:200',
-            'bairro' => 'required|string|max:100',
+            'endereco' => (empty($this->cliente) ? "required" : "nullable").'|string|max:200',
+            'bairro' => (empty($this->cliente) ? "required" : "nullable").'|string|max:100',
             'complemento_endereco' => 'nullable|string|max:100',
-            'cep' => 'required|max:4',
-            'data_cadastro' => 'required|date|date_format:Y-m-d'
+            'cep' => (empty($this->cliente) ? "required" : "nullable").'|max:4',
+            'data_cadastro' => (empty($this->cliente) ? "required" : "nullable").'|date|date_format:Y-m-d'
         ];
     }
     public function messages()

@@ -23,14 +23,14 @@ class  File
         }
 
         if (!empty($path) && !empty($name)) {
-           $storedFile=Storage::putFileAs($path, $file, $name);
+           $storedFile=Storage::putFileAs($path, $file, $name.'.'.$file->extension());
         }
-        
+       
         return $storedFile;
     }
 
     public static function Delete($path)
     {
-        return  Storage::delete($path);
+       return  Storage::delete($path);
     }
 }
