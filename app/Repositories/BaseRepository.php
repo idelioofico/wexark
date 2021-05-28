@@ -10,22 +10,27 @@ class BaseRepository
     {
         $this->obj = $obj;
     }
-    public function all(): array
+
+    public function all(): object
     {
-        return $this->obj->all();
+      return $this->obj->all();
     }
+
     public function store(array $attributes): object
     {
         return $this->obj->store($attributes);
     }
+
     public function find(int $id): object
     {
         return $this->obj->find($id);
     }
+
     public function update(array $attributes, int $id): bool
     {
         return $this->obj->find($id)->update($attributes);
     }
+
     public function delete(int $id): bool
     {
         return $this->obj->find($id)->delete();

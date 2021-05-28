@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PastelRequest;
 use App\Models\Pastel;
-use Illuminate\Http\Request;
+use App\Services\PastelService;
 
 class PastelController extends Controller
 {
+
+    protected $service;
+
+    public function __construct(PastelService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class PastelController extends Controller
      */
     public function index()
     {
-        return response()->json(Pastel::get()->toArray());
+        return response()->json($this->service->all());
     }
 
     /**
@@ -72,7 +79,7 @@ class PastelController extends Controller
      * @param  \App\Models\Pastel  $pastel
      * @return \Illuminate\Http\Response
      */
-    public function update(PastelRequest $request,Pastel $pastel)
+    public function update(PastelRequest $request, Pastel $pastel)
     {
         // $pastel = Pastel::findOrFail($pastel);
         $foto = $request->file('foto')->store('pasteis');
