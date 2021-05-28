@@ -34,7 +34,7 @@ class PastelController extends Controller
      */
     public function store(PastelRequest $request)
     {
-        $pastel=$this->service->store($request);
+        $pastel = $this->service->store($request);
         return response()->json($pastel);
     }
 
@@ -56,9 +56,9 @@ class PastelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PastelRequest $request,$id)
+    public function update(PastelRequest $request, $id)
     {
-        return response()->json($this->service->update($request,$id));
+        return response()->json($this->service->update($request, $id));
     }
 
     /**
@@ -67,9 +67,8 @@ class PastelController extends Controller
      *  $pastel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($pastel)
+    public function destroy($id)
     {
-        $pastel = Pastel::findOrFail($pastel);
-        return response()->json($pastel->delete());
+        return response()->json($this->service->delete($id));
     }
 }
