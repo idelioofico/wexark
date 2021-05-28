@@ -27,9 +27,15 @@ class PastelService implements IPastel
     public function store(PastelRequest $request)
     {
         $attributes = $request->all();
-        dd($request->file('foto'));
         $attributes['foto'] = File::Upload($this->path, $attributes['foto']);
-        $this->pastelRespository->store($attributes);
+
+        if (($createdPastel = $this->pastelRespository->store($attributes))) {
+            return $createdPastel;
+        } else {
+            //Delete uploaded phot is pastel not store
+            File::Delete($attributes['foto']);
+        }
+        return;
     }
 
     public function find(int $id)

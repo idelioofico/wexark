@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class  File
@@ -12,10 +13,20 @@ class  File
         return Storage::url($path);
     }
 
-    public static function Upload(string $path,object $file,string $name='')
+    public static function Upload(string $path, UploadedFile $file, string $name = '')
     {
-        $name=$name?:sha1($file->name);
-        return Storage::putFileAs($path, $file, $name);
+        $storedFile = "";
+
+        if (empty($name) && !empty($path)) {
+
+            $storedFile = Storage::putFile($path, $file);
+        }
+
+        if (!empty($path) && !empty($name)) {
+           $storedFile=Storage::putFileAs($path, $file, $name);
+        }
+        
+        return $storedFile;
     }
 
     public static function Delete($path)

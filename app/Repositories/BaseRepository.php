@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use stdClass;
+
 class BaseRepository
 {
     protected $obj;
@@ -18,7 +20,8 @@ class BaseRepository
 
     public function store(array $attributes): object
     {
-        return $this->obj->store($attributes);
+        // return $this->obj->store($attributes);
+        return new stdClass;
     }
 
     public function find(int $id): object

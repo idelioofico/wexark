@@ -42,10 +42,7 @@ class PastelController extends Controller
      */
     public function store(PastelRequest $request)
     {
-        $foto = $request->file('foto')->store('pasteis');
-        $pastel = Pastel::create($request->all());
-        $pastel->foto = $foto;
-        $pastel->save();
+        $pastel=$this->service->store($request);
         return response()->json($pastel);
     }
 
