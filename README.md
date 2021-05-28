@@ -4,6 +4,7 @@
 
 ## API para gerenciamento de pedidos de uma pastelaria
 
+Este projecto foi desenvolvido usando o framework Laravel na sua versão 8.x com uma base de dados SQLite.
 
 
 **Requisitos:**
@@ -229,7 +230,7 @@ php artisan serve
 **Registar Pedido:**
 
 ```
-Nota: Após registar um pedido é enviado um email de forma síncrona para o cliente com os detalhes do pedido, por isso é importante ter o service de enail devidamente configurado
+Nota: Após registar um pedido é enviado um email de forma síncrona para o cliente com os detalhes do pedido, por isso é importante ter o serviço de email devidamente configurado
 ```
 
 
