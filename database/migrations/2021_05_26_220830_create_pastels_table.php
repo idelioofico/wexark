@@ -16,7 +16,7 @@ class CreatePastelsTable extends Migration
         Schema::create('pastels', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 100);
-            $table->double('preco', 3, 2);
+            $table->double('preco', 5, 2);
             $table->string('foto')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -21,7 +21,7 @@ class PedidoController extends Controller
         $pedido = Pedido::with('pedido_items')->get()->transform(function ($pedido) {
 
             return array(
-                'íd' => $pedido->id,
+                'id' => $pedido->id,
                 'cliente' => $pedido->cliente->nome,
                 'pedido_items' => $pedido->pedido_items->transform(function ($item) {
                     return array(
