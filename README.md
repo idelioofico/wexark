@@ -42,7 +42,7 @@ php artisan serve
 - URL:
 
   ```
-  GET /api/clientes    exemplo: https://wexark.test/api/clientes
+  GET /api/clientes    exemplo: https://dominio.test/api/clientes
   ```
 
 - Resposta: Array JSON da lista de clientes
@@ -54,7 +54,7 @@ php artisan serve
 - URL: 
 
   ```
-  POST /api/clientes    exemplo: https://wexark.test/api/clientes
+  POST /api/clientes    exemplo: https://dominio.test/api/clientes
   ```
 
 - Parametros:
@@ -80,7 +80,7 @@ php artisan serve
 - URL: 
 
   ```
-  GET /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/1
+  GET /api/clientes/{id}  exemplo: https://dominio.test/api/clientes/1
   ```
 
   
@@ -94,7 +94,7 @@ php artisan serve
 - URL: 
 
   ```
-  PUT /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/2
+  PUT /api/clientes/{id}  exemplo: https://dominio.test/api/clientes/2
   ```
 
 - Parametros:
@@ -120,7 +120,7 @@ php artisan serve
 - URL: 
 
   ```
-  Delete /api/clientes/{id}  exemplo: https://wexark.test/api/clientes/2
+  Delete /api/clientes/{id}  exemplo: https://dominio.test/api/clientes/2
   ```
 
 - Resposta: Boolean
@@ -138,7 +138,7 @@ php artisan serve
 - URL:
 
   ```
-  GET /api/pasteis  exemplo: https://wexark.test/api/pasteis
+  GET /api/pasteis  exemplo: https://dominio.test/api/pasteis
   ```
 
 - Resposta: Array JSON da lista dos pasteis
@@ -150,7 +150,7 @@ php artisan serve
 - URL: 
 
   ```
-  POST /api/pasteis  exemplo: https://wexark.test/api/pasteis
+  POST /api/pasteis  exemplo: https://dominio.test/api/pasteis
   ```
 
 - Parametros:
@@ -170,7 +170,7 @@ php artisan serve
 - URL: 
 
   ```
-  GET /api/pasteis/{id} exemplo: https://wexark.test/api/pasteis/2
+  GET /api/pasteis/{id} exemplo: https://dominio.test/api/pasteis/2
   ```
 
   
@@ -184,7 +184,7 @@ php artisan serve
 - URL: 
 
   ```
-  PUT /api/pasteis/{id}  exemplo: https://wexark.test/api/pasteis/2
+  PUT /api/pasteis/{id}  exemplo: https://dominio.test/api/pasteis/2
   ```
 
 - Parametros:
@@ -204,7 +204,7 @@ php artisan serve
 - URL: 
 
   ```
-  Delete /api/pasteis/{id} exemplo: https:://wexark.test/api/pasteis/2
+  Delete /api/pasteis/{id} exemplo: https:://dominio.test/api/pasteis/2
   ```
 
 - Resposta: Boolean
@@ -220,7 +220,7 @@ php artisan serve
 - URL:
 
   ```
-  GET /api/pedidos  exemplo: https://wexark.test/api/pedidos
+  GET /api/pedidos  exemplo: https://dominio.test/api/pedidos
   ```
 
 - Resposta: Array JSON da lista dos pedidos
@@ -238,7 +238,7 @@ Nota: Após registar um pedido é enviado um email de forma síncrona para o cli
 - URL: 
 
   ```
-  POST /api/pedidos  exemplo: https://wexark.test/api/pedidos
+  POST /api/pedidos  exemplo: https://dominio.test/api/pedidos
   ```
 
 - Parametros:
@@ -278,7 +278,7 @@ Exemplo de paramtros:
 URL: 
 
 - ```
-  GET /api/pedidos/{id} exemplo: https://wexark.test/api/pedidos/2
+  GET /api/pedidos/{id} exemplo: https://dominio.test/api/pedidos/2
   ```
 
   
@@ -292,7 +292,7 @@ URL:
 - URL: 
 
   ```
-  Delete /api/pedidos/{id} exemplo: https:://wexark.test/api/pedidos/2
+  Delete /api/pedidos/{id} exemplo: https:://dominio.test/api/pedidos/2
   ```
 
 - Resposta: Boolean
